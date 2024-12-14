@@ -3,8 +3,12 @@ from transformers import pipeline
 
 app = Flask(__name__)
 
-# Load the translation pipeline
-translator = pipeline("translation", model="Helsinki-NLP/opus-mt-en-fi")
+try:
+    # Load the translation pipeline
+    translator = pipeline("translation", model="Helsinki-NLP/opus-mt-en-fi")
+
+except Exception as e:
+    print("Error loading model", e)
 
 @app.route('/')
 def index():
@@ -13,6 +17,7 @@ def index():
 
 @app.route('/translate', methods=['POST'])
 def translate():
+
     # Get text from the form
     input_text = request.form.get('text')
     if not input_text:
