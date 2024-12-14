@@ -38,11 +38,5 @@ python app.py
 http://localhost:5000/
 
 ```
-
-
-
-
-
-
-
-<p align="center"> <em>bijaykarki 2024</em> </p>
+<br>
+<p align="left"> <em>bijaykarki 2024</em> </p>
