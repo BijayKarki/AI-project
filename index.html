@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English to Finnish Translator</title>
+</head>
+<body>
+    <h1>English to Finnish Translator</h1>
+    <form id="translation-form">
+        <label for="text">Enter English text:</label><br>
+        <textarea id="text" name="text" rows="4" cols="50" required></textarea><br><br>
+        <button type="submit">Translate</button>
+    </form>
+    <h2>Translation:</h2>
+    <p id="result"></p>
+
+    <script>
+        document.getElementById('translation-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const text = document.getElementById('text').value;
+
+            const response = await fetch('/translate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams({ text }),
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                document.getElementById('result').textContent = data.translated_text;
+            } else {
+                document.getElementById('result').textContent = 'Error in translation!';
+            }
+        });
+    </script>
+</body>
+</html>
